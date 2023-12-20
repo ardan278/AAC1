@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock Door App</title>
+
+    <!-- Add Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-database.js"></script>
+
+    <!-- Your Firebase configuration -->
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyD6RqEO2Dhan8s36hG6QCP-11Hwwi3qMKQ",
+            authDomain: "databasepract-f631d.firebaseapp.com",
+            projectId: "databasepract-f631d",
+            storageBucket: "databasepract-f631d.appspot.com",
+            messagingSenderId: "638136321226",
+            appId: "1:638136321226:web:4d3e41364007bfcc5a2033"
+        };
+  
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Reference to your Firebase database
+        var db = firebase.database();
+
+        // Reference to the 'door' node in your database
+        var doorRef = db.ref('door');
+
+        // Listen for changes in the 'door' node
+        doorRef.on('value', function(snapshot) {
+            var isDoorOpen = snapshot.val();
+            if (isDoorOpen) {
+                alert('Door is open!');
+                // You can add additional logic here to perform actions when the door is open
+            }
+        });
+
+        // Function to unlock the door
+        function unlockDoor() {
+            // Reference to the 'door' node in your database
+            var doorRef = db.ref('door');
+
+            // Set the 'door' state to true (unlock)
+            doorRef.set(true);
+        }
+    </script>
+</head>
+<body>
+    <h1>Welcome to Unlock Door App</h1>
+    
+    <!-- Add a button to unlock the door -->
+    <button onclick="unlockDoor()">Unlock Door</button>
+</body>
+</html>
